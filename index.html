@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="title">
+        <h3>VUE 101</h3>
+        <p>Today we are going to get familiar with one of the most modern and coolest</p>
+        <p>javascript web framework Called <b>VUE JS</b></p>
+    </div>
+    <div id="app">
+        <div v-if="!index">
+            <input type="text" v-model="newTodo">
+            <button class="button" v-on:click="addTodo">ADD TODO</button>
+        </div>
+        <div v-else>
+            <input type="text" v-model="updatedTodo">
+            <button class="button" v-on:click="updateTodo">Update TODO</button>
+        </div>
+        <ul>
+            <div v-for="(todo, index) in todosList" v-bind:key="index" class="div">
+                <li v-on:click="completeTodo(index)" v-bind:class="{'completed':todo.completed }">{{todo.name}}</li>
+                <button class="edit" v-if="todosList.length" v-on:click="editTodo(index)">Edit</button>
+                <button v-on:click="removeTodo(index)">Delete</button>
+                <button class="arrow" v-on:click="swapUp(index)">&#8593;</button>
+                <button class="arrow" v-on:click="swapDown(index)">&#8595;</button>
+            </div>
+        </ul>
+
+        <button v-if="todosList.length" v-on:click="removeAll">Remove All</button>
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
